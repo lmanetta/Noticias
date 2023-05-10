@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Factories\NoticiaFactory;
+// use App\Factories\NoticiaFactory;
+use App\Models\Noticia;
 
 class NoticiaController extends Controller
 {
     public function index()
     {
-        $noticias = NoticiaFactory::generarNoticias(30);
+        // $noticias = NoticiaFactory::generarNoticias(30);
+        $noticias = Noticia::all();
         return view('backend.noticia.index', compact('noticias'));
 
     }
+    
     public function show ($id)
     {
         $noticia = (object) array (

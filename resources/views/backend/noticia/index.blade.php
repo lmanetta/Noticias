@@ -1,4 +1,7 @@
+
+
 @extends ('backend.layouts.main')
+
         
 @section('title', 'Noticias')
 @section('content')
