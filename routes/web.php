@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\NoticiaController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/noticias', [NoticiaController::class, 'index' ]) -> name('noticias.index');
-Route::get('/noticias/{noticia}', [NoticiaController::class, 'show' ]) -> name('noticia.show');
+// Route::get('/noticias', [NoticiaController::class, 'index' ]) -> name('noticias.index');
+// Route::get('/noticias/{noticia}', [NoticiaController::class, 'show' ]) -> name('noticia.show');
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::resource('users', UserController::class);
+Route::resource('noticias', NoticiaController::class);
+Route::get('/noticiasConImagenes', [NoticiaController::class, 'conImagenes'])->name('noticias.conImagenes');
