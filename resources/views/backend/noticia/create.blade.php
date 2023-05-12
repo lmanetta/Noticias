@@ -42,6 +42,6 @@
         </div>
 
     </div>
-    </br><button type="submit" style="width: 100%;" class="btn btn-primary">{{ __('noticias.guardar') }}</button></div>
+    </br><button type="submit" style="width: 100%;" class="btn btn-primary">Guardar</button></div>
     {!! Form::close() !!}
 @endsection
