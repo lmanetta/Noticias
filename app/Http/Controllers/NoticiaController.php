@@ -64,7 +64,9 @@ class NoticiaController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $noticia = Noticia::findOrFail($id);
+        $users = User::pluck('name', 'id');
+        return view('backend.noticia.edit', compact('noticia', 'users'));
     }
 
     /**
@@ -72,7 +74,22 @@ class NoticiaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $noticia = Noticia::findOrFail($id);
+        $validatedData = $request->validate(
+            [
+                'titulo' => 'required|unique:noticias,titulo,' . $id,
+                'cuerpo' => 'required',
+                'autor' => 'required',
+                'image' => 'image|max:2048'
+            ]
+        );
+
+        $noticia->update($validatedData);
+        $noticia->autor = $request->input('autor');
+        $noticia->save();
+
+        $request->session()->flash('status', 'Se guardó correctamente la noticia ' . $noticia->titulo);
+        return redirect()->route('noticias.edit', $noticia->id);
     }
 
     /**
